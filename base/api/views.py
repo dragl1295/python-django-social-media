@@ -15,7 +15,7 @@ class IsHostOrReadOnly(BasePermission):
     def has_object_permission(self, request, view, obj):
         if request.method in ['GET', 'HEAD', 'OPTIONS']:
             return True
-        return request.POST.get() == request.user
+        return obj.host == request.user
        
     
 class IsMessageHostOrReadOnly(BasePermission):
@@ -23,7 +23,7 @@ class IsMessageHostOrReadOnly(BasePermission):
         
         if request.method in ['GET', 'HEAD', 'OPTIONS']:
             return True
-        return self.kwargs.get('user_id') == request.user
+        return obj.user == request.user
 
 
 
